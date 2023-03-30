@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Cobot_Application_Practicum.iml" filepath="$PROJECT_DIR$/.idea/Cobot_Application_Practicum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Cobot_Application_Practice.iml" filepath="$PROJECT_DIR$/.idea/Cobot_Application_Practice.iml" />
     </modules>
   </component>
 </project>
