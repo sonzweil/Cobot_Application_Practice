@@ -45,7 +45,6 @@ class URDash(QDialog):
         while True:
             time.sleep(0.5)
 
-            sum = 0
             status = self.check_status()
             print("status : " + status)
             if "Teleop driving" in status:
