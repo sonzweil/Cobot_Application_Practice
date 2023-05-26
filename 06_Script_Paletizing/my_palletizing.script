@@ -1,0 +1,64 @@
+# 변수입력 
+rx = 0.031
+ry = -3.140
+rz = 0.000
+dx = 0.06 # dx within item 1 and item 2 and item 3
+dy = -0.06 # dy within menu 1 and menu 2
+menu1_posY = -0.25
+menu2_posY = menu1_posY + dy
+
+# pick 부분 변수
+pick_x = 0.105
+pick_y = -0.310
+upper_pick_z = 0.1
+down_pick_z = 0.085
+pick_upper_pos = p[pick_x, pick_y, upper_pick_z, rx, ry, rz]
+pick_down_pos = p[pick_x, pick_y, down_pick_z, rx, ry, rz]
+
+# put 부분 변수
+upper_pallet_z = 0.1
+down_pallet_z = 0.03
+
+def set_xyz_position(px, py, pz): 
+  position = p[px, py, pz, rx, ry, rz] 
+  return position 
+end 
+
+
+def pickup(pick_upper_pos, pick_down_pos):
+  movej(pick_upper_pos)
+  movel(pick_down_pos)
+  sync()
+  movel(pick_upper_pos)
+end
+
+def put_down(pallet_upper_pos, pallet_down_pos):
+  movej(pallet_upper_pos)
+  movel(pallet_down_pos)
+  sync()
+  movel(pallet_upper_pos)
+end
+
+def my_palletizing():
+  selected_item=0 
+  num_of_item=0 
+  movej(pick_upper_pos)
+  while (True):
+    first_count = 0
+    second_count = 0
+    while (first_count < 3): # 팔레트할 개수인 num_of_placing에 도달할 때까지 반복 
+      pickup(pick_upper_pos, pick_down_pos)
+      pallet_upper_pos = p[0.23 + dx * first_count, menu1_posY, upper_pallet_z, rx, ry, rz]
+      pallet_down_pos = p[0.23 + dx * first_count, menu1_posY, down_pallet_z, rx, ry, rz]
+      put_down(pallet_upper_pos, pallet_down_pos)
+      first_count = first_count + 1
+    end
+    while (second_count < 3):
+      pickup(pick_upper_pos, pick_down_pos)
+      pallet_upper_pos = p[0.23 + dx * second_count, menu2_posY, upper_pallet_z, rx, ry, rz]
+      pallet_down_pos = p[0.23 + dx * second_count, menu2_posY, down_pallet_z, rx, ry, rz]
+      put_down(pallet_upper_pos, pallet_down_pos)
+      second_count = second_count + 1
+    end
+  end
+end
